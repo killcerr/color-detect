@@ -11,6 +11,8 @@
 #include <unistd.h>
 #endif
 bool is_support_ansi_color(FILE *file) {
+  if (file == NULL)
+    file = stdout;
 #ifdef _WIN32
   if (_isatty(_fileno(file)) == 0)
     return false;
@@ -43,5 +45,8 @@ bool is_support_ansi_color(FILE *file) {
 }
 /*
 #include <stdio.h>
-int main() { printf("%d\n", is_support_ansi_color(stdout)); }
+int main() {
+  printf("%d %d %d\n", is_support_ansi_color(stdout),
+         is_support_ansi_color(stderr),is_support_ansi_color(NULL));
+}
 */
