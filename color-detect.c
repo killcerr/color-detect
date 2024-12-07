@@ -25,9 +25,9 @@ bool is_support_ansi_color(FILE *file) {
   size_t term_len = 0;
   if (term_env)
     term_len = strlen(term_env);
-  if ((term_env && term_len < 5) ||
-      (term_env && term_len >= 5 &&
-       strcmp(term_env + term_len - 5, "color") != 0))
+  if (term_env != NULL &&
+      (term_len < 5 ||
+       (term_len >= 5 && strcmp(term_env + term_len - 5, "color") != 0)))
     return false;
 #ifdef _WIN32
   DWORD console_mode;
